@@ -1,12 +1,24 @@
 
 function subsets(nums: number[]): number[][] {
-  const result = [[]];
+  const result = []
 
-  for (let num of nums) {
-    const copy = result.map(n => [...n, num])
+  function dfs(nums, slate, idx) {
+    // base
+    if ( idx === nums.length) {
+      result.push([...slate]);
+      return;
+    }
 
-    result.push(...copy)
+    // exclude
+    dfs(nums, slate, idx + 1)
+
+    // include
+    slate.push(nums[idx]);
+    dfs(nums, slate, idx + 1)
+    slate.pop();
   }
+
+  dfs(nums, [], 0)
 
   return result
 };
