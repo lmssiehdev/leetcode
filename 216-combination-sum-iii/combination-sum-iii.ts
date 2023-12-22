@@ -8,6 +8,10 @@ function combinationSum3(k: number, n: number): number[][] {
     }
 
     for (let i = start; i <= 9; i++) {
+      if ( sum + i > n ) {
+        continue; 
+      }
+
       slate.push(i);
       backtrack(slate, i + 1, sum + i);
       slate.pop();
