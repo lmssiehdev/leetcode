@@ -1,26 +1,26 @@
 function combinationSum(candidates: number[], target: number): number[][] {
-    const result: number[][] = [];
-    
-    function dfs(slate, idx, sum) {
-            
-        if ( sum === target) {
-            result.push([...slate])
-            return;
-        }
-        
-        for (let i = idx; i < candidates.length; i++) {
-            const candidate = candidates[i];
+  const result = [];
 
-            if ( sum + candidate > target) continue;
-            
-            slate.push(candidate);
-            dfs(slate, i, sum + candidate)
-            slate.pop()
-        }
-            
+  function backtrack(slate, i, sum) {
+
+    if ( sum === 0) {
+      result.push([...slate]);
+      return;
     }
-    dfs([], 0, 0)
 
-    return result;
+    for (let j = i; j < candidates.length; j++) {
+      const curr = candidates[j]
+      
+      if (sum-curr < 0 || i > candidates.length) continue;
+
+      slate.push(curr);
+      backtrack(slate, j, sum - curr)
+      slate.pop();
+    }
+
+  }
+
+  backtrack([], 0, target);
+
+  return result;
 }
-// [2, 3, 6, ]
