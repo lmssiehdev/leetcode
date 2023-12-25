@@ -12,15 +12,17 @@
  * }
  */
 
-function sortedArrayToBST(nums: number[], left = 0, right = nums.length -1): TreeNode | null { 
-  if ( left > right ) return null;
+function sortedArrayToBST(nums: number[]): TreeNode | null {
+  return dfs(nums, 0, nums.length -1 )
+  function dfs(nums: number[], left: number, right: number) {
+    if ( left > right ) return null;
+    const middle = Math.floor(( left + right ) / 2);
+    const root = new TreeNode(nums[middle]);
 
+    root.left = dfs(nums, left, middle - 1);
+    root.right = dfs(nums, middle + 1, right);
 
-  const middle = Math.floor(( left + right ) / 2);
-  const root = new TreeNode(nums[middle]);
-
-  root.left = sortedArrayToBST(nums, left, middle - 1);
-  root.right = sortedArrayToBST(nums, middle + 1, right);
-
-  return root;
+    return root;
+  }
+  
 };
