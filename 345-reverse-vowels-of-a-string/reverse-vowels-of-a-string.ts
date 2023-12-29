@@ -1,8 +1,6 @@
 function reverseVowels(s: string): string {
-    const vowels = new Set([
-      ...['a', 'e', 'i', 'o', 'u'],
-      ...['a', 'e', 'i', 'o', 'u'].map(t => t.toUpperCase())]);
-      
+    const vowels = new Set(Array.from("aAeEiIoOuU"));
+
     const array = Array.from(s);
 
     let startIdx = 0;
