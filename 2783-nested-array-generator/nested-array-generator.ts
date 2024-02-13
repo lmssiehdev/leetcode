@@ -11,14 +11,21 @@ function traverse(item, result) {
   result.push(item) 
 }
 
-function* inorderTraversal(arr: MultidimensionalArray): Generator<number, void, unknown> {
-    const result = [];
-    traverse(arr, result)
-    console.log(result)
-    const reversed = result;
-    for ( const item of reversed ) {
-      yield item;
+function* inorderTraversal(array: MultidimensionalArray): Generator<number, void, unknown> {
+    for ( const item of array ) {
+      if (Array.isArray(item)) {
+          yield* inorderTraversal(item)
+      } else {
+        yield item;
+      }
     }
+    // const result = [];
+    // traverse(arr, result)
+    // console.log(result)
+    // const reversed = result;
+    // for ( const item of reversed ) {
+    //   yield item;
+    // }
 };
 
 /**
